@@ -49,7 +49,7 @@ func FixSimulatorBinary(verbose bool) error {
 		return fmt.Errorf("binary not found after build: %s", binaryPath)
 	}
 
-	fmt.Printf("  ✓ Simulator built successfully at: %s\n", binaryPath)
+	fmt.Printf("  [OK] Simulator built successfully at: %s\n", binaryPath)
 	return nil
 }
 
@@ -79,7 +79,7 @@ func FixMissingCacheDir(verbose bool) error {
 		}
 	}
 
-	fmt.Printf("  ✓ Cache directory created at: %s\n", cacheDir)
+	fmt.Printf("  [OK] Cache directory created at: %s\n", cacheDir)
 	return nil
 }
 
@@ -120,7 +120,7 @@ func FixProtocolRegistration(verbose bool) error {
 			}
 			fmt.Printf("  ⚠ Corrupted registry backed up to: %s\n", backupFile)
 		} else {
-			fmt.Printf("  ✓ Protocol registry already exists and is valid at: %s\n", registryFile)
+			fmt.Printf("  [OK] Protocol registry already exists and is valid at: %s\n", registryFile)
 			return nil
 		}
 	}
@@ -141,7 +141,7 @@ func FixProtocolRegistration(verbose bool) error {
 		return fmt.Errorf("failed to write registry file: %w", err)
 	}
 
-	fmt.Printf("  ✓ Protocol registry created at: %s\n", registryFile)
+	fmt.Printf("  [OK] Protocol registry created at: %s\n", registryFile)
 	return nil
 }
 
@@ -174,6 +174,6 @@ func FixGoModDependencies(verbose bool) error {
 		return fmt.Errorf("go mod download failed: %w", err)
 	}
 
-	fmt.Println("  ✓ Go module dependencies resolved")
+	fmt.Println("  [OK] Go module dependencies resolved")
 	return nil
 }

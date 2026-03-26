@@ -607,16 +607,16 @@ func runFixers(deps []DependencyStatus, skipConfirm, verbose bool) error {
 	// Summary
 	fmt.Println("\n=== Fix Summary ===")
 	if len(successFixes) > 0 {
-		fmt.Printf("\033[32m✓ Fixed (%d):\033[0m\n", len(successFixes))
+		fmt.Printf("\033[32m[OK] Fixed (%d):\033[0m\n", len(successFixes))
 		for _, fix := range successFixes {
-			fmt.Printf("  ✓ %s\n", fix)
+			fmt.Printf("  [OK] %s\n", fix)
 		}
 	}
 
 	if len(failedFixes) > 0 {
-		fmt.Printf("\033[31m✗ Failed (%d):\033[0m\n", len(failedFixes))
+		fmt.Printf("\033[31m[FAIL] Failed (%d):\033[0m\n", len(failedFixes))
 		for _, fix := range failedFixes {
-			fmt.Printf("  ✗ %s\n", fix)
+			fmt.Printf("  [FAIL] %s\n", fix)
 		}
 		return fmt.Errorf("some fixes failed")
 	}
