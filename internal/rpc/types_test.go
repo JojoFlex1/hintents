@@ -25,14 +25,6 @@ func strPtr(s string) *xdr.ScString  { ss := xdr.ScString(s); return &ss }
 func symPtr(s string) *xdr.ScSymbol  { ss := xdr.ScSymbol(s); return &ss }
 func bytesPtr(b []byte) *xdr.ScBytes { sb := xdr.ScBytes(b); return &sb }
 
-func mustBigInt(s string) *big.Int {
-	n, ok := new(big.Int).SetString(s, 10)
-	if !ok {
-		panic("invalid big.Int string: " + s)
-	}
-	return n
-}
-
 // ---- Requirement 1: primitive types -----------------------------------------
 
 func TestScValToGoValue_Void(t *testing.T) {
