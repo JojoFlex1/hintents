@@ -42,7 +42,8 @@ func TestSearchCommand_EmptyQueryRejectedByRPCLayer(t *testing.T) {
 	searchHorizonURLFlag = "http://127.0.0.1:1"
 
 	// Ensure we call RunE directly (cobra args validation is tested separately).
-	err := searchCmd.RunEContext(context.Background(), searchCmd, []string{""})
+	searchCmd.SetContext(context.Background())
+	err := searchCmd.RunE(searchCmd, []string{""})
 	if err == nil {
 		t.Fatal("expected empty query to fail")
 	}
