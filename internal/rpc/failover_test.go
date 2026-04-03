@@ -117,6 +117,20 @@ func TestClient_GetHealth_Failover_AllNodesFailedErrorAggregation(t *testing.T) 
 		require.Contains(t, errMsg, node.url)
 		require.Contains(t, errMsg, node.msg)
 	}
+// TestClient_Rotation_SorobanURLSync verifies that after a URL rotation both
+// HorizonURL and SorobanURL point to the newly selected node.  Before the
+// Protocol V2 standardization, rotateURL contained two dead SorobanURL
+// assignments (overwritten by a third) — this test pins the correct invariant.
+func TestClient_Rotation_SorobanURLSync(t *testing.T) {
+	urls := []string{"http://node1.example.com", "http://node2.example.com"}
+	client := NewClientWithURLsOption(urls, Testnet, "")
+
+	client.rotateURL()
+
+	assert.Equal(t, "http://node2.example.com", client.HorizonURL,
+		"HorizonURL should reflect the rotated node")
+	assert.Equal(t, client.HorizonURL, client.SorobanURL,
+		"SorobanURL must stay in sync with HorizonURL after rotation")
 }
 
 func TestClient_GetTransaction_Failover_Logic(t *testing.T) {
