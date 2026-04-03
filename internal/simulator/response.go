@@ -46,6 +46,7 @@ type OptimizationReport struct {
 	SourceLocation    *SourceLocation      `json:"source_location,omitempty"`
 	WasmOffset        *uint64              `json:"wasm_offset,omitempty"`
 	LinearMemoryDump  string               `json:"linear_memory_dump,omitempty"`
+	Snapshots         *SnapshotsPayload    `json:"snapshots,omitempty"`
 }
 
 type BudgetUsage struct {
@@ -56,4 +57,18 @@ type BudgetUsage struct {
 	MemoryLimit        uint64  `json:"memory_limit"`
 	CPUUsagePercent    float64 `json:"cpu_usage_percent"`
 	MemoryUsagePercent float64 `json:"memory_usage_percent"`
+}
+
+// SnapshotsPayload carries optional inline and lazy-resolved snapshot handles
+// returned by the simulator.
+type SnapshotsPayload struct {
+	Inline map[string]InlineSnapshot `json:"inline,omitempty"`
+	IDs    []string                  `json:"ids,omitempty"`
+}
+
+// InlineSnapshot is the in-band snapshot representation used on the simulator
+// response channel.
+type InlineSnapshot struct {
+	LedgerEntries [][]string `json:"ledger_entries,omitempty"`
+	LinearMemory  string     `json:"linear_memory,omitempty"`
 }
