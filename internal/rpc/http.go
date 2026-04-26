@@ -49,7 +49,7 @@ func (c *Client) getHTTPClient() HTTPClient {
 func createHTTPClient(token string, timeout time.Duration, middlewares ...Middleware) *http.Client {
 	cfg := DefaultRetryConfig()
 
-	var transport http.RoundTripper = http.DefaultTransport
+	transport := http.RoundTripper(http.DefaultTransport)
 	if token != "" {
 		transport = &authTransport{
 			token:     token,

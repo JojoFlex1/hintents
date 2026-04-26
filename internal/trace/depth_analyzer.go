@@ -156,11 +156,11 @@ func (da *DepthAnalyzer) FormatErrorPath(path *PathMatch) string {
 	}
 
 	var sb strings.Builder
-	sb.WriteString(fmt.Sprintf("Error at depth %d:\n", path.ErrorDepth))
+	fmt.Fprintf(&sb, "Error at depth %d:\n", path.ErrorDepth)
 
 	for i, node := range path.Nodes {
 		indent := strings.Repeat("  ", i)
-		sb.WriteString(fmt.Sprintf("%s[%d] %s", indent, i, da.formatNode(node)))
+		fmt.Fprintf(&sb, "%s[%d] %s", indent, i, da.formatNode(node))
 		sb.WriteString("\n")
 	}
 

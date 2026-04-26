@@ -18,9 +18,9 @@ const (
 
 func resourceNotFoundError(suggestion string) error {
 	if suggestion != "" {
-		return fmt.Errorf("Resource not found. Did you mean %s?", suggestion)
+		return fmt.Errorf("resource not found; did you mean %s?", suggestion)
 	}
-	return fmt.Errorf("Resource not found.")
+	return fmt.Errorf("resource not found")
 }
 
 // resolvePartialID returns the matching candidate when input is a unique
