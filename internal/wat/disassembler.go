@@ -99,7 +99,7 @@ func (s *Snippet) Format() string {
 		if i == s.TargetIndex {
 			marker = "> "
 		}
-		b.WriteString(fmt.Sprintf("%s0x%04x: %s\n", marker, inst.Offset, inst.String()))
+		fmt.Fprintf(&b, "%s0x%04x: %s\n", marker, inst.Offset, inst.String())
 	}
 	return b.String()
 }
@@ -289,7 +289,7 @@ func FormatFallback(wasmBytes []byte, failingOffset uint64, contextLines int) st
 	var b strings.Builder
 	b.WriteString("Source mapping unavailable. Showing WAT disassembly:\n\n")
 	b.WriteString(snippet.Format())
-	b.WriteString(fmt.Sprintf("\nFailing instruction at offset 0x%x\n", failingOffset))
+	fmt.Fprintf(&b, "\nFailing instruction at offset 0x%x\n", failingOffset)
 
 	return b.String()
 }

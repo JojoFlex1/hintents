@@ -108,9 +108,10 @@ func TestDetector_FlawedContract(t *testing.T) {
 	heuristicCount := 0
 
 	for _, finding := range findings {
-		if finding.Type == FindingVerifiedRisk {
+		switch finding.Type {
+		case FindingVerifiedRisk:
 			verifiedCount++
-		} else if finding.Type == FindingHeuristicWarn {
+		case FindingHeuristicWarn:
 			heuristicCount++
 		}
 	}
